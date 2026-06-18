@@ -28,7 +28,9 @@ export default function OrderDetail() {
     fetch(`/api/orders/${id}/notes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: noteText }),
+      // Old code:
+      // body: JSON.stringify({ text: noteText }),
+      body: JSON.stringify({ body: noteText }),
     })
       .then((response) => {
         if (!response.ok) {

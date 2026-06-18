@@ -21,7 +21,9 @@ export default function CustomerDetail() {
   if (error) return <p className="error-banner">Could not load this customer. Please try again later.</p>
   if (!customer) return <p className="muted">Loading…</p>
 
-  const addressLines = customer.address.split(',').map((line) => line.trim())
+  // Old code:
+  // const addressLines = customer.address.split(',').map((line) => line.trim())
+  const addressLines = customer.address ? customer.address.split(',').map((line) => line.trim()) : []
 
   return (
     <div>
@@ -36,9 +38,18 @@ export default function CustomerDetail() {
         </div>
         <div className="detail-card">
           <h3>Shipping address</h3>
+          {/* Old code:
           {addressLines.map((line) => (
             <p key={line}>{line}</p>
           ))}
+          */}
+          {addressLines.length > 0 ? (
+            addressLines.map((line) => (
+              <p key={line}>{line}</p>
+            ))
+          ) : (
+            <p className="muted">No address registered</p>
+          )}
         </div>
       </div>
       <h3>Order history</h3>
